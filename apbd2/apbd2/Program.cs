@@ -9,7 +9,7 @@ public enum ContainerType
 
 class Container
 {
-    private static int ContainerSerialNumber = 0;
+    protected static int ContainerSerialNumber = 0;
     
     public string ShipSerialNumber { get; private set;}
     public double PackageMassInKg { get; private set; }
@@ -20,7 +20,7 @@ class Container
     public ContainerType Type { get; private set; }
 
 
-    Container(ContainerType type, double packageMassInKg, double ownMass, double height,
+    public Container(ContainerType type, double packageMassInKg, double ownMass, double height,
         double depth)
     {
         Type = type;
@@ -31,7 +31,7 @@ class Container
         Depth = depth;
     }
 
-    private string CreateNewSerialNumber()
+    protected string CreateNewSerialNumber()
     {
         string SerialNumber = Type switch
         {
@@ -42,7 +42,24 @@ class Container
         return $"KON-{SerialNumber}-{ContainerSerialNumber++}";
     }
     
-    
-    
+    public override string ToString()
+    {
+        return $"=====================\nnumer seryjny: {ShipSerialNumber}, \ntyp kontenera: {Type}, \nmasa ladunku: {PackageMassInKg} kg, \nwysokosc: {Height} cm, \nwaga wlasna: {OwnMass} kg, \nglebokosc: {Depth} cm\n=====================\n";
+    }
 }
+
+class Program
+{
+    public static void Main(string[] args)
+    {
+        
+    
+    Container container1 = new Container(ContainerType.chlodniczy, 500, 200, 100, 150);
+    Console.WriteLine(container1);
+    
+    }
+}
+
+    
+
 
