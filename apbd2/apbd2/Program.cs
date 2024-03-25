@@ -45,6 +45,9 @@ class Program
     
     Container container4 = new Container(ContainerType.chlodniczy, 700, 200, 150, 100);
     Console.WriteLine(container4);
+    
+    Container container5 = new Container(ContainerType.gazowy, 400, 100, 50, 20);
+    Console.WriteLine(container5);
 
     ChlodniczyContainer chlodniczyContainer = new ChlodniczyContainer(ProductType.Bananas, 15, 50, 100, 20, 30);
     Console.WriteLine(chlodniczyContainer);
@@ -57,12 +60,30 @@ class Program
     //plynnyContainer1.Load(100000000000);
     //Console.WriteLine($"po zaladunku masa calego statku to {plynnyContainer1.PackageMassInKg+plynnyContainer1.OwnMass} kg");
 
-    Ship ship = new Ship(10000000, 20, 5, 25000000);
+    Ship ship1 = new Ship(10000000, 20, 5, 25000000);
     
-    ship.LoadContainer(container1);
-    ship.LoadContainer(container3);
+    ship1.LoadContainer(container1);
+    ship1.LoadContainer(container3);
 
-    ship.PrintShipInfo();
+    ship1.PrintShipInfo();
+
+
+    Ship ship2 = new Ship(20000, 40, 10, 250000);
+    ship2.LoadContainer(container2);
+    ship2.LoadContainer(container4);
+    
+    ship2.PrintShipInfo();
+    
+    
+    ship1.zastap(ship1,"KON-C-0", container5);
+    
+    ship2.przenies(ship1,container1,ship2);
+    
+    
+    
+    ship1.PrintShipInfo();
+    ship2.PrintShipInfo();
+
     }
 }
 

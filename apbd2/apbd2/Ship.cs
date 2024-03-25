@@ -60,4 +60,24 @@ public class Ship
             Console.WriteLine(container.ToString());
         }
     }
+
+    public void przenies(Ship ship1, Container container, Ship ship2)
+    {
+        ship1.ALLContainers.Remove(container);
+        ship2.LoadContainer(container);
+    }
+
+    public void zastap(Ship ship, string serialNumber1, Container container)
+    {
+        var containerToReplace = ALLContainers.FirstOrDefault(c => c.ShipSerialNumber == serialNumber1);
+        if (containerToReplace == null)
+        {
+            throw new Exception($"kontener o numerze {serialNumber1} nie istnieje");
+        }
+
+        ALLContainers.Remove(containerToReplace);
+        LoadContainer(container);
+    }
+    
+    
 }
