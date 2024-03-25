@@ -31,4 +31,10 @@ public class PlynnyContainer : Container, IHazardNotifier
             PackageMassInKg = m;
         }
     }
+    
+    public override string ToString()
+    {
+        return $"=====================\nnumer seryjny: {ShipSerialNumber}, \ntyp kontenera: {Type}, \nmasa ladunku: {PackageMassInKg} kg, \nwysokosc: {Height} cm, \nwaga wlasna: {OwnMass} kg, \nglebokosc: {Depth} cm\ntyp substancji: {PlynnyType} \n=====================\n";
+    }
+    
 }

@@ -32,4 +32,9 @@ public class ChlodniczyContainer : Container, IHazardNotifier
         }
     }
     
+    
+    public override string ToString()
+    {
+        return $"=====================\nnumer seryjny: {ShipSerialNumber}, \ntyp kontenera: {Type}, \nmasa ladunku: {PackageMassInKg} kg, \nwysokosc: {Height} cm, \nwaga wlasna: {OwnMass} kg, \nglebokosc: {Depth} cm\nprodukt: {ProductType}\ntemperatura: {Temperature}\n=====================\n";
+    }
 }
