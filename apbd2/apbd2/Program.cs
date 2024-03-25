@@ -1,4 +1,4 @@
-﻿
+﻿namespace apbd2;
 
 public enum ContainerType
 {
@@ -7,12 +7,19 @@ public enum ContainerType
     gazowy
 }
 
-class Container
+public enum PlynnyType
+{
+    niebezpieczny,
+    zwykly
+}
+
+
+public class Container
 {
     protected static int ContainerSerialNumber = 0;
     
     public string ShipSerialNumber { get; private set;}
-    public double PackageMassInKg { get; private set; }
+    public double PackageMassInKg { get; set; }
     public double Height { get; private set; }
     public double OwnMass { get; private set; }
     public double Depth { get; private set; }
@@ -24,45 +31,47 @@ class Container
         double depth)
     {
         Type = type;
-        ShipSerialNumber = CreateNewSerialNumber();
+        ShipSerialNumber = CreateNewSerialNumber(type);
         PackageMassInKg = packageMassInKg;
         OwnMass = ownMass;
         Height = height;
         Depth = depth;
     }
 
-    protected string CreateNewSerialNumber()
+    public string CreateNewSerialNumber(ContainerType type)
     {
-        string SerialNumber = Type switch
+        string SerialNumber = "";
+        switch (type)
         {
-            ContainerType.chlodniczy => "C",
-            ContainerType.plynny => "P",
-            ContainerType.gazowy => "G"
-        };
+            case ContainerType.chlodniczy:
+                SerialNumber = "C";
+                break;
+            case ContainerType.plynny:
+                SerialNumber = "L";
+                break;
+            case ContainerType.gazowy:
+                SerialNumber = "G";
+                break;
+        }
         return $"KON-{SerialNumber}-{ContainerSerialNumber++}";
     }
     
-    public override string ToString()
-    {
-        return $"=====================\nnumer seryjny: {ShipSerialNumber}, \ntyp kontenera: {Type}, \nmasa ladunku: {PackageMassInKg} kg, \nwysokosc: {Height} cm, \nwaga wlasna: {OwnMass} kg, \nglebokosc: {Depth} cm\n=====================\n";
-    }
-
-
-    double MaximumLoadWeight()
+    
+    public double MaximumLoadWeight()
     {
         return Height * Depth * OwnMass;
     }
 
-    double Deload()
+    public double Deload()
     {
         return PackageMassInKg = 0;
     }
 
-    void Load(double m)
+    public void Load(double m)
     {
         if (m > MaximumLoadWeight())
         {
-            throw new OverfillException();
+            throw new Exception("za duza waga:(");
         }
         else
         {
@@ -70,6 +79,14 @@ class Container
         }
     }
     
+    
+    
+    
+    
+    public override string ToString()
+        {
+            return $"=====================\nnumer seryjny: {ShipSerialNumber}, \ntyp kontenera: {Type}, \nmasa ladunku: {PackageMassInKg} kg, \nwysokosc: {Height} cm, \nwaga wlasna: {OwnMass} kg, \nglebokosc: {Depth} cm\n=====================\n";
+        }
 }
 
 
@@ -85,6 +102,13 @@ class Program
 
     Container container2 = new Container(ContainerType.gazowy, 400, 150, 200, 100);
     Console.WriteLine(container2);
+
+    PlynnyContainer plynnyContainer1 = new PlynnyContainer(PlynnyType.niebezpieczny, 400000, 100, 100, 90);
+    Console.WriteLine(plynnyContainer1);
+    
+    //Console.WriteLine($"maksymalna ladownosc pakunku to {plynnyContainer1.MaximumLoadWeight()} kg");
+    //plynnyContainer1.Load(100000000000);
+    //Console.WriteLine($"po zaladunku masa calego statku to {plynnyContainer1.PackageMassInKg+plynnyContainer1.OwnMass} kg");
 
     }
 }
