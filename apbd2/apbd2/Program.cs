@@ -46,7 +46,33 @@ class Container
     {
         return $"=====================\nnumer seryjny: {ShipSerialNumber}, \ntyp kontenera: {Type}, \nmasa ladunku: {PackageMassInKg} kg, \nwysokosc: {Height} cm, \nwaga wlasna: {OwnMass} kg, \nglebokosc: {Depth} cm\n=====================\n";
     }
+
+
+    double MaximumLoadWeight()
+    {
+        return Height * Depth * OwnMass;
+    }
+
+    double Deload()
+    {
+        return PackageMassInKg = 0;
+    }
+
+    void Load(double m)
+    {
+        if (m > MaximumLoadWeight())
+        {
+            throw new OverfillException();
+        }
+        else
+        {
+            PackageMassInKg = m;
+        }
+    }
+    
 }
+
+
 
 class Program
 {
@@ -56,7 +82,10 @@ class Program
     
     Container container1 = new Container(ContainerType.chlodniczy, 500, 200, 100, 150);
     Console.WriteLine(container1);
-    
+
+    Container container2 = new Container(ContainerType.gazowy, 400, 150, 200, 100);
+    Console.WriteLine(container2);
+
     }
 }
 
