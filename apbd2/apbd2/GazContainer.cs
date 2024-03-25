@@ -18,4 +18,22 @@ public class GazContainer : Container, IHazardNotifier
     }
     
     
+    public void Load(double m)
+    {
+        if (m > MaximumLoadWeight())
+        {
+            DangerMessage(ShipSerialNumber);
+            throw new Exception("za duza waga dla niebezpiecznego plynu");
+        }
+        else
+        {
+            PackageMassInKg = m;
+        }
+    }
+
+    public double Deload()
+    {
+        return PackageMassInKg * 0.05;
+    }
+    
 }
