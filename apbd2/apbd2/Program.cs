@@ -49,9 +49,17 @@ class Program
     Container container5 = new Container(ContainerType.gazowy, 400, 100, 50, 20);
     Console.WriteLine(container5);
 
+    
+    
+    
+    
+    
+    
     ChlodniczyContainer chlodniczyContainer = new ChlodniczyContainer(ProductType.Bananas, 15, 50, 100, 20, 30);
     Console.WriteLine(chlodniczyContainer);
 
+    GazContainer gazContainer = new GazContainer(100, 200, 50, 10, 10);
+    Console.WriteLine(gazContainer);
     
     PlynnyContainer plynnyContainer1 = new PlynnyContainer(PlynnyType.niebezpieczny, 400000, 100, 100, 90);
     Console.WriteLine(plynnyContainer1);
